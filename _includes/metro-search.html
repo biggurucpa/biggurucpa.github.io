@@ -1,0 +1,21 @@
+
+
+{{page.search}}
+
+{% for geo in site.data.geo %}
+    {% if geo.metro_en == page.search %}
+        
+                 <div class="row">
+                 <div class="card">
+                     <h2>
+                         Автосервисы и СТО специализирующиеся на {{page.search}}: 
+                     </h2>
+                 </div>
+                 </div>
+        <div class="row">
+            <div class="card">
+        {{geo.ID}}
+    </div>    </div>
+    {% endif %}
+
+{% endfor %} 

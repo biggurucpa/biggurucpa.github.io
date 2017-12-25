@@ -1,0 +1,63 @@
+
+{% assign answers = 0 %}
+
+{% for sto in site.data.sto %}
+    {% if sto.marki contains page.search %}
+        
+        {% if answers == 0 %}
+         <div class="row">
+             <div class="card">
+             <h2>
+                 Автосервисы и СТО специализирующиеся на марке {{page.search}}: 
+             </h2>
+         </div>     
+         </div>
+        {% endif %}
+        <div class="row">
+            <div class="card">
+        <h2>Автосервис: <a href="{{site.baseurl}}/service/{{sto.name_en}}-{{sto.id}}">{{sto.name}}</a></h2>
+        <p>Адресс: {{sto.adress}}</p>
+        <p>Марки: 
+        {% for marki in sto.marki %}
+        | 
+            {% if sto.marki != "Все марки" %}
+                <a href="{{site.baseurl}}/service-{{marki}}">{{marki}}</a> |
+            {% else%}
+                Все марки |
+            {% endif%}   
+        {% endfor %}
+        </p>
+        <a class="btn btn-primary" href="{{site.baseurl}}/service/{{sto.name_en}}-{{sto.id}}" role="button">Подробнее ></a>
+        {% assign answers=answers+1 %}
+    </div>    </div>
+    {% endif %}
+
+{% endfor %} 
+
+{% if answers == 0 %}
+    <div class="row">
+          <div class="card">
+    <H2>Сервисы {{page.search}} не найдены</H2>
+    <p>попробуйте подобрать универсальный сервис</p>
+    </div></div>
+    {% for sto in site.data.sto %}
+        {% if sto.marki == "Все марки"%}
+            <div class="row">
+                  <div class="card">
+            <h2>Автосервис: <a href="{{site.baseurl}}/service/{{sto.name_en}}-{{sto.id}}">{{sto.name}}</a></h2>
+            <p>Адресс: {{sto.adress}}</p>
+            <p>Марки: {{sto.marki}}</p>
+            <a class="btn btn-primary" href="{{site.baseurl}}/service/{{sto.name_en}}-{{sto.id}}" role="button">Подробнее ></a>
+            </div></div>
+        {% endif %}
+    {% endfor %}
+    
+{% endif %}
+
+ <div class="row">
+<div class="card">
+    <h2>
+        Tакже вы можете подобрать сервис из числа универсальных: <a href="{{site.baseurl}}/service-all">Здесь >></a>
+    </h2>
+</div>
+</div>
